@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
 
     return ChangeNotifierProvider<MyModel>(
       create: (BuildContext context) {
-        return myData;
+        return MyModel();
       },
       child: MaterialApp(
         home: Scaffold(
@@ -30,11 +30,18 @@ class MyApp extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(20),
                 color: Colors.green[200],
-                child: ElevatedButton(
-                  onPressed: () {
-                    myData.doSomething();
+                child: Builder(
+                  builder: (BuildContext context) {
+                    return ElevatedButton(
+                      onPressed: () {
+                        //myData.doSomething();
+
+                        MyModel data = Provider.of<MyModel>(context, listen: false);
+                        data.doSomething();
+                      },
+                      child: Text('Click me!'),
+                    );
                   },
-                  child: Text('Click me!'),
                 ),
               ),
               // child: Consumer<MyModel>(
