@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
     //   child: (),
     // );
 
-    return Provider<MyModel>(
+    return ChangeNotifierProvider<MyModel>(
       create: (BuildContext context) {
         return myData;
       },
@@ -31,15 +31,25 @@ class MyApp extends StatelessWidget {
                 padding: const EdgeInsets.all(20),
                 color: Colors.green[200],
                 child: Consumer<MyModel>(
-                  builder: (context, mymodel, child) {
-                    return RaisedButton(
-                      child: Text('Do something'),
+                  builder: (_ctx, _data, _child) {
+                    return ElevatedButton(
                       onPressed: () {
-                        mymodel.doSomething();
+                        _data.doSomething();
                       },
+                      child: Text('Click me!'),
                     );
                   },
                 ),
+                // child: Consumer<MyModel>(
+                //   builder: (context, mymodel, child) {
+                //     return RaisedButton(
+                //       child: Text('Do something'),
+                //       onPressed: () {
+                //         mymodel.doSomething();
+                //       },
+                //     );
+                //   },
+                // ),
               ),
               Container(
                 padding: const EdgeInsets.all(35),
@@ -58,10 +68,15 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyModel {
+class MyModel extends ChangeNotifier{
   String text = "Hello";
 
   void doSomething() {
-    text = "World";
+    if (text == "Hello")
+      text = "World";
+    else
+      text = "Hello";
+
+    notifyListeners();
   }
 }
