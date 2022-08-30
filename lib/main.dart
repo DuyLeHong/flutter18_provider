@@ -30,27 +30,23 @@ class MyApp extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(20),
                 color: Colors.green[200],
-                child: Consumer<MyModel>(
-                  builder: (_ctx, _data, _child) {
-                    return ElevatedButton(
-                      onPressed: () {
-                        _data.doSomething();
-                      },
-                      child: Text('Click me!'),
-                    );
+                child: ElevatedButton(
+                  onPressed: () {
+                    myData.doSomething();
                   },
+                  child: Text('Click me!'),
                 ),
-                // child: Consumer<MyModel>(
-                //   builder: (context, mymodel, child) {
-                //     return RaisedButton(
-                //       child: Text('Do something'),
-                //       onPressed: () {
-                //         mymodel.doSomething();
-                //       },
-                //     );
-                //   },
-                // ),
               ),
+              // child: Consumer<MyModel>(
+              //   builder: (context, mymodel, child) {
+              //     return RaisedButton(
+              //       child: Text('Do something'),
+              //       onPressed: () {
+              //         mymodel.doSomething();
+              //       },
+              //     );
+              //   },
+              // ),
               Container(
                 padding: const EdgeInsets.all(35),
                 color: Colors.blue[200],
@@ -68,7 +64,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyModel extends ChangeNotifier{
+class MyModel extends ChangeNotifier {
   String text = "Hello";
 
   void doSomething() {
